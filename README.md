@@ -149,74 +149,6 @@ npm run dev
 
 ---
 
-## ⚙️ Environment Variables
-
-| Variable               | Description                    |
-| ---------------------- | ------------------------------ |
-| `NODE_ENV`             | production or development      |
-| `PORT`                 | Remix server port              |
-| `DATABASE_URL`         | Postgres connection string     |
-| `JWT_ACCESS_SECRET`    | HS256 secret for access token  |
-| `JWT_REFRESH_SECRET`   | HS256 secret for refresh token |
-| `SESSION_COOKIE_NAME`  | Cookie name for access token   |
-| `R2_ENDPOINT`          | Cloudflare R2 S3 endpoint      |
-| `R2_ACCESS_KEY_ID`     | R2 access key                  |
-| `R2_SECRET_ACCESS_KEY` | R2 secret                      |
-| `R2_BUCKET`            | Bucket name                    |
-| `CLOUDFLARE_ZONE_ID`   | For cache purge in CI          |
-| `CLOUDFLARE_API_TOKEN` | For cache purge in CI          |
-
----
-
-## 🌐 Nginx in front of Node
-
-**nginx.conf snippet**
-
-```nginx
-server {
-  listen 80;
-  server_name freetypingcamp.com www.freetypingcamp.com;
-
-  location /assets/ {
-    root /var/www/freetypingcamp/public/;
-    add_header Cache-Control "public, max-age=31536000, immutable";
-  }
-
-  location / {
-    proxy_pass http://127.0.0.1:3000;
-    proxy_set_header Host $host;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
-  }
-}
-```
-
-Cloudflare provides TLS, WAF, and CDN caching of static assets.
-
----
-
-## 🧯 Observability
-
-* **Logs**: pino in JSON
-* **Metrics**: `/metrics` Prometheus endpoint
-* **Tracing**: OpenTelemetry optional
-
----
-
-## 🔄 CI/CD (GitHub Actions)
-
-Pipeline stages:
-
-1. Lint and type check
-2. Unit and E2E tests
-3. Build
-4. Deploy to DigitalOcean Droplet via SSH
-5. Run DB migrations
-6. Reload PM2
-7. Purge Cloudflare cache
-
----
-
 ## 🧭 Roadmap
 
 * Social sign in
@@ -225,9 +157,4 @@ Pipeline stages:
 * Offline PWA mode
 * WCAG accessibility testing
 
----
-
-## 🤝 Contributing
-
-Please run tests and linting before PRs.
 
