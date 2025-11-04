@@ -1,7 +1,9 @@
 
-# freetypingcamp.com — Typing Test App (Remix Refactor)
+# freetypingcamp.com: Typing Test App (Remix Refactor)
 
 ## A production-grade typing test platform refactored from a React SPA to **Remix** for server-first rendering, predictable SEO, and zero hydration flicker. 
+
+View Live on: www.freetypingcamp.com 
 
 The final repo for the live version of my appliaction is stored in a separate repo. This repo serves as a building block for the final version.
 
